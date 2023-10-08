@@ -1,1 +1,2 @@
-# Monitoring-Cloud-Infrastructure-with-ansible-Prometheus-and-grafana
+# Monitoring-aws-cloud-Infrastructure-with-ansible-Prometheus-and-grafana
+This project demonstrates how to set up a comprehensive infrastructure monitoring system on Amazon Web Services (AWS) using Ansible for orchestration, Prometheus for metrics collection, and Grafana for data visualization. By following this guide, you'll be able to monitor the performance and health of your AWS instances in real time.
