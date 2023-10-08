@@ -1,0 +1,68 @@
+
+# Ansible Playbook to install Prometheus 
+---
+- name: Install Prometheus
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    # Step1: Download File
+    - name: Download File
+      get_url:
+        url: https://github.com/prometheus/prometheus/releases/download/v2.47.0-rc.0/prometheus-2.47.0-rc.0.linux-amd64.tar.gz
+        dest: /home/ubuntu
+
+    # Step2: Extract Tar File   
+    - name: extract the tar file
+      unarchive:
+        src: /home/ubuntu/prometheus-2.47.0-rc.0.linux-amd64.tar.gz
+        dest: /home/ubuntu/
+  
+    # Step3: Create a Directory
+    - name: Create a Directory
+      file:
+        path: /opt/prometheus
+        state: directory
+
+    # Step4: Move file to that Directory
+    - name: Move file to that directory
+      command: mv /home/ubuntu/prometheus-2.47.0-rc.0.linux-amd64 /opt/prometheus/
+
+    # Step5: Create systemuser
+    - name: create prometheus user
+      user:
+        name: prometheus
+        system: yes
+        shell: /bin/false
+
+    # Step6: Give ownership to systemuser
+    - name: change the ownership of file and directory to prometheus user
+      # command: chown -R prometheus /opt/prometheus/ (This Command Gives warning)
+      ansible.builtin.file:
+       path: /opt/prometheus
+       owner: prometheus
+       recurse: yes
+       state: directory
+
+    # Step7: Update configuration file
+    - name: copy the configuration file content
+      copy:
+        src: /home/ubuntu/ansible-playbook/prometheus-conf.yaml
+        dest: /opt/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus.yml
+
+    # Step8: Crate system file
+    - name: copy system file to the system path
+      copy:
+        src: /home/ubuntu/ansible-playbook/prometheus.service
+        dest: /etc/systemd/system/
+
+    #Step9: Reload the system
+    - name: Restart system
+      command: systemctl daemon-reload
+
+    # Step10: Start and enable the system
+    - name: Start and enable the service
+      systemd:
+        name: prometheus
+        state: started
+        enabled: yes    

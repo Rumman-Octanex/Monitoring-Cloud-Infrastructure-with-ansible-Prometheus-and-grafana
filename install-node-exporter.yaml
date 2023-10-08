@@ -1,0 +1,74 @@
+#  Ansible Playbook to install Node-Exporter 
+---
+- name: Install Node-Exporter
+  hosts: web_nodes
+  become: true
+  tasks:
+    # Step1: Download File
+    - name: Download File
+      get_url:
+        url: https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
+        dest: /home/ubuntu/
+
+    # Step2: Extract Tar File   
+    - name: extract the tar file
+      unarchive:
+        src: /home/ubuntu/node_exporter-1.6.1.linux-amd64.tar.gz
+        dest: /home/ubuntu/
+        remote_src: yes
+  
+    # Step3: Create a Directory
+    - name: Create a Directory
+      file:
+        path: /opt/node-exporter
+        state: directory
+
+    # Directory Not Empty (If the problemm occur then use this task)
+    # - name: Remove files inside the directory
+    #   shell: rm -r /opt/node-exporter/*
+    #   args:
+    #     warn: no  
+
+    # Step4: Move file to that Directory
+    - name: Move file to that directory
+      command: mv /home/ubuntu/node_exporter-1.6.1.linux-amd64 /opt/node-exporter/
+
+    # Step5: Create systemuser
+    - name: create Node-Exporter user
+      user:
+        name: node-exporter
+        system: yes
+        shell: /bin/false
+
+    # Step6: Give ownership to systemuser
+    - name: change the ownership of file and directory to node-exporter user
+      # command: chown -R prometheus /opt/prometheus/ (This Command Gives warning)
+      ansible.builtin.file:
+       path: /opt/node-exporter
+       owner: node-exporter
+       recurse: yes
+       state: directory
+
+    # Step7: Crate system file
+    - name: copy system file to the system path
+      copy:
+        # Copy from controller to remote machine
+        src: /home/ubuntu/ansible-playbook/node-exporter.service
+        dest: /etc/systemd/system/
+
+    #Step8: Reload the system
+    - name: Restart system
+      command: systemctl daemon-reload
+
+    # Step9: Start Node Exporter
+    - name: Start the service
+      systemd:
+        name: node-exporter
+        state: started
+        enabled: yes    
+    
+    # Step10: Enable Node Exporter
+    - name: Enable service
+      systemd:
+        name: node-exporter.service
+        enabled: yes 

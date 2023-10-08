@@ -1,0 +1,7 @@
+---
+- name: Ping all server
+  hosts: web_nodes
+  tasks:
+    - name: Ping the server
+      ping: 
+

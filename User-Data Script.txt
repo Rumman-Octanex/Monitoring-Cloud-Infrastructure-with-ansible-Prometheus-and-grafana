@@ -1,0 +1,5 @@
+#!/bin/bash
+sudo apt update -y
+sudo apt install ansible -y
+sudo mkdir -p /home/ubuntu/ansible-playbook
+sudo reboot

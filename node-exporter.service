@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus_Node_Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node-exporter
+ExecStart=/opt/node-exporter/node_exporter-1.6.1.linux-amd64/node_exporter
+Restart=always
+
+[Install]
+WantedBy=default.target
