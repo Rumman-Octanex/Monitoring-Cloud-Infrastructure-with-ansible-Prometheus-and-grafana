@@ -38,12 +38,11 @@ For the instance types:
 
 When creating the Master/Controller Node, pass the following user data script. It will automatically install Ansible and create an Ansible playbook directory.
 
-bash
-#!/bin/bash
+`#!/bin/bash
 sudo apt update -y
 sudo apt install ansible -y
 sudo mkdir -p /home/ubuntu/ansible-playbook
-sudo reboot
+sudo reboot`
 
 ![bash script](Images/1.User%20Data.png)
 
@@ -75,21 +74,21 @@ After the Prometheus installation completes, execute the Grafana playbook simila
 
 Once both playbooks have run successfully, you can verify the installations. Access Prometheus by opening a web browser and navigating to the Prometheus URL using the appropriate port number, e.g., http://master-node-ip:9090.
 
-![prometheus](Images/Prometheus.png)
+![prometheus](Images/2.Prometheus.png)
 
 Access Grafana by opening a web browser and navigating to the Grafana URL with the relevant port, typically http://master-node-ip:3000 . Ensure that both applications are working correctly.
 
-![Grafana](Images/Grafana.png)
+![Grafana](Images/3.Grafana.png)
 
 ##Install and configure node exporter
 ####Create SSH Key File and Edit the Inventory File
 On your master node, create a file named __private_keys inside the ~/.ssh/  directory__. Save the private key of the .pem file you downloaded when creating the instances into the private_keys file.
 
-![Priave Key](Images/Private_keys.png)
+![Priave Key](Images/4.Private_keys.png)
 
 Open the Ansible inventory file and add the public IP addresses of your worker nodes. The inventory file is typically named inventory. Run the __ping-server.yaml__ Ansible playbook to ensure that the master node can connect with the worker nodes.
 
-![Ping Server](Images/Ping Worker Nodes.png)
+![Ping Server](Images/5.Ping Worker Nodes.png)
 
 `ansible-playbook -i inventory ping-server.yaml`
 
@@ -100,7 +99,7 @@ Run the __node-exporter.yaml__ Ansible playbook to install Node Exporter on the 
 
 Access each worker node by opening a web browser and navigating to the worker's URL using port 9100 __(e.g., http://worker-node-ip:9100)__. Ensure that Node Exporter is working properly.
 
-![Node Exporter](Images/Node Exporter.png)
+![Node Exporter](Images/6.Node Exporter.png)
 
 ####Edit Prometheus Configuration and Restart
 Edit the Prometheus configuration file to include information(- targets) about your worker nodes. Located at __/opt/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus.yml.__
@@ -118,16 +117,16 @@ Restart Prometheus to apply the configuration changes.
 
 Access Prometheus by opening a web browser and check the status of worker nodes in Prometheus to ensure they are UP and collecting metrics.
 
-![Node Exporter Test](Images/Node Exporter Test.png)
+![Node Exporter Test](Images/7.Node Exporter Test.png)
 
 ##Create Grafana Dashboard
 Use the default username and password, which is usually admin. Access Grafana via its web interface. Add Prometheus as a data source from connections.
 
-![Data Source](Images/Add Data Sources.png)
+![Data Source](Images/8.Add Data Sources.png)
 
 Go to the "Create" section in Grafana. Choose "Dashboard" and then "Import. Import this (https://grafana.com/grafana/dashboards/1860-node-exporter-full/) pre-made dashboard from Grafana Labs, by pasting the JSON link, or you can create one from scratch based on your requirements.
 
-![Grafana Dashboard](Images/Grafana Dashboard.png)
+![Grafana Dashboard](Images/9.Grafana Dashboard.png)
 
 Now, you can effectively monitor your worker nodes and share this information with others.
 
