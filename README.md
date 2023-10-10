@@ -128,12 +128,12 @@ Use the default username and password, which is usually admin. Access Grafana vi
 
 Go to the "Create" section in Grafana. Choose "Dashboard" and then "Import. Import this (https://grafana.com/grafana/dashboards/1860-node-exporter-full/) pre-made dashboard from Grafana Labs, by pasting the JSON link, or you can create one from scratch based on your requirements.
 
-![Grafana Dashboard](Images/9.Grafana Dashboard.png)
+![Grafana Dashboard](Images/9. Grafana Dashboard)
 
 Now, you can effectively monitor your worker nodes and share this information with others.
 
 ## Support
-If you have any issues feel free to contact me via ﻿__rumman.octanex@gmail.com.__
+If you have any issues feel free to contact me via ﻿rumman.octanex@gmail.com.
 
 
 
