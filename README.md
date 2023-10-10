@@ -54,7 +54,8 @@ SSH into the Master/Controller Node and verify that Ansible is installed.
 Now, your AWS instances are set up with the necessary security groups, and Ansible is installed on the Master/Controller Node for further configuration.
 
 ## Install prometheus and grafana
-####Access the Ansible Playbook Directory and clone the GitHub Repository 
+
+#### Access the Ansible Playbook Directory and clone the GitHub Repository 
 On the master node, you can use the following command to clone this repository.
 
 `git clone ﻿https://github.com/Rumman-Octanex/Monitoring-Cloud-Infrastructure-with-ansible-Prometheus-and-grafana.git `
@@ -63,7 +64,7 @@ Now, copy all the files from the Monitoring-Cloud-Infrastructure-with-ansible-Pr
 
 `sudo cp -r Monitoring-Cloud-Infrastructure-with-ansible-Prometheus-and-grafana/* ansible-playbook/`
 
-####Run the Playbooks and Verify the installation
+#### Run the Playbooks and Verify the installation
 Execute the Prometheus playbook using the ansible-playbook command. For example:
 
 `ansible-playbook install-prometheus.yaml`
@@ -80,8 +81,9 @@ Access Grafana by opening a web browser and navigating to the Grafana URL with t
 
 ![Grafana](Images/3.Grafana.png)
 
-##Install and configure node exporter
-####Create SSH Key File and Edit the Inventory File
+## Install and configure node exporter
+
+#### Create SSH Key File and Edit the Inventory File
 On your master node, create a file named __private_keys inside the ~/.ssh/  directory__. Save the private key of the .pem file you downloaded when creating the instances into the private_keys file.
 
 ![Priave Key](Images/4.Private_keys.png)
@@ -92,7 +94,7 @@ Open the Ansible inventory file and add the public IP addresses of your worker n
 
 `ansible-playbook -i inventory ping-server.yaml`
 
-####Install and Verify Node Exporter
+#### Install and Verify Node Exporter
 Run the __node-exporter.yaml__ Ansible playbook to install Node Exporter on the worker nodes.
 
 `ansible-playbook -i inventory install-node-exporter.yaml`
@@ -101,7 +103,7 @@ Access each worker node by opening a web browser and navigating to the worker's 
 
 ![Node Exporter](Images/6.Node Exporter.png)
 
-####Edit Prometheus Configuration and Restart
+#### Edit Prometheus Configuration and Restart
 Edit the Prometheus configuration file to include information(- targets) about your worker nodes. Located at __/opt/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus.yml.__
 
 `scrape_configs:
@@ -119,7 +121,7 @@ Access Prometheus by opening a web browser and check the status of worker nodes 
 
 ![Node Exporter Test](Images/7.Node Exporter Test.png)
 
-##Create Grafana Dashboard
+## Create Grafana Dashboard
 Use the default username and password, which is usually admin. Access Grafana via its web interface. Add Prometheus as a data source from connections.
 
 ![Data Source](Images/8.Add Data Sources.png)
