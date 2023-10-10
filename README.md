@@ -119,7 +119,7 @@ Restart Prometheus to apply the configuration changes.
 
 Access Prometheus by opening a web browser and check the status of worker nodes in Prometheus to ensure they are UP and collecting metrics.
 
-![Node Exporter Test](Images/7.Node Exporter Test.png)
+![Node Exporter Test](Images/7.Node Exporter Test)
 
 ## Create Grafana Dashboard
 Use the default username and password, which is usually admin. Access Grafana via its web interface. Add Prometheus as a data source from connections.
