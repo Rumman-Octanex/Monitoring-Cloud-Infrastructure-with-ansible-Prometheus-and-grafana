@@ -42,7 +42,7 @@ When creating the Master/Controller Node, pass the following user data script. I
 sudo apt update -y
 sudo apt install ansible -y
 sudo mkdir -p /home/ubuntu/ansible-playbook
-sudo reboot
+sudo reboot ```
 
 ![bash script](Images/1.User%20Data.png)
 
