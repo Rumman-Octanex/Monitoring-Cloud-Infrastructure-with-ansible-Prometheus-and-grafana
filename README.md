@@ -90,7 +90,11 @@ On your master node, create a file named __private_keys inside the ~/.ssh/  dire
 
 Open the Ansible inventory file and add the public IP addresses of your worker nodes. The inventory file is typically named inventory. Run the __ping-server.yaml__ Ansible playbook to ensure that the master node can connect with the worker nodes.
 
+<<<<<<< HEAD
 ![Ping Server](Images/5.Ping%20Worker%20Nodes.png)
+=======
+![Ping Server](Images/5.Ping Worker Nodes.png)
+>>>>>>> 832c32bb62aea1d9add65efceca9874f8604b751
 
 `ansible-playbook -i inventory ping-server.yaml`
 
@@ -101,7 +105,11 @@ Run the __node-exporter.yaml__ Ansible playbook to install Node Exporter on the 
 
 Access each worker node by opening a web browser and navigating to the worker's URL using port 9100 __(e.g., http://worker-node-ip:9100)__. Ensure that Node Exporter is working properly.
 
+<<<<<<< HEAD
 ![Node Exporter](Images/6.Node%20Exporter.png)
+=======
+![Node Exporter](Images/6.Node Exporter.png)
+>>>>>>> 832c32bb62aea1d9add65efceca9874f8604b751
 
 #### Edit Prometheus Configuration and Restart
 Edit the Prometheus configuration file to include information(- targets) about your worker nodes. Located at __/opt/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus.yml.__
@@ -119,16 +127,28 @@ Restart Prometheus to apply the configuration changes.
 
 Access Prometheus by opening a web browser and check the status of worker nodes in Prometheus to ensure they are UP and collecting metrics.
 
+<<<<<<< HEAD
 ![Node Exporter Test](Images/7.Node%20Exporter%20Test.png)
+=======
+![Node Exporter Test](Images/7.Node Exporter Test)
+>>>>>>> 832c32bb62aea1d9add65efceca9874f8604b751
 
 ## Create Grafana Dashboard
 Use the default username and password, which is usually admin. Access Grafana via its web interface. Add Prometheus as a data source from connections.
 
+<<<<<<< HEAD
 ![Data Source](Images/8.Add%20Data%20Sources.png)
 
 Go to the "Create" section in Grafana. Choose "Dashboard" and then "Import. Import this (https://grafana.com/grafana/dashboards/1860-node-exporter-full/) pre-made dashboard from Grafana Labs, by pasting the JSON link, or you can create one from scratch based on your requirements.
 
 ![Grafana Dashboard](Images/9.%20Grafana%20Dashboard.png)
+=======
+![Data Source](Images/8.Add Data Sources.png)
+
+Go to the "Create" section in Grafana. Choose "Dashboard" and then "Import. Import this (https://grafana.com/grafana/dashboards/1860-node-exporter-full/) pre-made dashboard from Grafana Labs, by pasting the JSON link, or you can create one from scratch based on your requirements.
+
+![Grafana Dashboard](Images/9. Grafana Dashboard.png)
+>>>>>>> 832c32bb62aea1d9add65efceca9874f8604b751
 
 Now, you can effectively monitor your worker nodes and share this information with others.
 
