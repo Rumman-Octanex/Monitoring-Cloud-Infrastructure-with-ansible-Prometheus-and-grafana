@@ -108,12 +108,12 @@ Access each worker node by opening a web browser and navigating to the worker's 
 ### Edit Prometheus Configuration and Restart
 Edit the Prometheus configuration file to include information(- targets) about your worker nodes. Located at __/opt/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus.yml.__
 
-` scrape_configs: `
- ` - job_name: prometheus `
-  ` static_configs: `
-    ` - targets: ["localhost:9090"] `
-    ` - targets: ["worker-node-ip:9100"] `
-    ` - targets: ["worker-node-ip:9100"] `
+` scrape_configs: 
+  - job_name: prometheus 
+    static_configs: 
+     - targets: ["localhost:9090"] 
+     - targets: ["worker-node-ip:9100"] 
+     - targets: ["worker-node-ip:9100"] `
 
 Restart Prometheus to apply the configuration changes.
 
